@@ -1,0 +1,50 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+
+# Logs
+logs
+*.log
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs / Editors
+.vscode
+.idea
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Coverage
+coverage
+
+# Temporary files
+tmp
+temp
+
+# Cache
+.cache
+
+# Tauri
+src-tauri/target
+
+# Docker
+.docker
+
+# Misc
+*.local
