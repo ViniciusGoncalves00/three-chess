@@ -32,7 +32,7 @@ To track this process over time, this repository contains documentation of the d
 ## First Step
 
 First of all, I believe that applying the concepts to a project is better than applying them without context.
-Therefore, the first step is to choose a topic. This is an important decision, as it will influence how much I can learn during the process, how long it will take me to achieve a satisfactory result, and so on.
+Therefore, the first step is to choose a theme. This is an important decision, as it will influence how much I can learn during the process, how long it will take me to achieve a satisfactory result, and so on.
 
 ## Why a chess game?
 
@@ -40,3 +40,29 @@ Chess is a good choice, I believe. There are a lot of content about the game, un
 There is some complexity, but less than several other possibilities. It has a good balance between complexity and possibility of learning.
 
 It is possible to imagine this project finished.
+
+## Technologies
+
+### Front-End (FE)
+
+I feel comfortable working with FE, so I will use technologies that I already know and like. There is nothing in particular that I want to learn at moment in FE, and I also do not want to increase the complexity.
+- Typescript
+- ThreeJS
+- AlpineJS
+- TailwindCSS
+- HTML
+- CSS
+
+### Back-End (BE)
+-
+
+### Infrastructure
+-
+
+### Database
+-
+
+### Tooling
+- Docker
+- Tauri
+
