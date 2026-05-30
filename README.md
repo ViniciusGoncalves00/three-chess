@@ -26,8 +26,8 @@ To track this process over time, this repository contains documentation of the d
 
 ## Goals
 - Practice backend and database related skills.
-- Practice cloud related skills.
 - Practice mobile related skills.
+- Practice cloud related skills.
 
 ## First Step
 
@@ -40,6 +40,10 @@ Chess is a good choice, I believe. There are a lot of content about the game, un
 There is some complexity, but less than several other possibilities. It has a good balance between complexity and possibility of learning.
 
 It is possible to imagine this project finished.
+
+## How support both desktop and mobile?
+
+Progressive web applications (PWAs) seem like a good option, and I have never used it. So, this is an opportunity to see how it works.
 
 ## Technologies
 
@@ -64,5 +68,5 @@ I feel comfortable working with FE, so I will use technologies that I already kn
 
 ### Tooling
 - Docker
-- Tauri
+- PWA
 
