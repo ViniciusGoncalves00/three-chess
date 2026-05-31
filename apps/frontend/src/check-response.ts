@@ -1,4 +1,4 @@
-import { HttpMethod } from "../../../packages/http-methods.js";
+import type { HttpMethod } from "@three-chess/common";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

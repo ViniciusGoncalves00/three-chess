@@ -1,5 +1,5 @@
 import { setupResponseChecker } from "./check-response.js";
-import { HttpMethod } from "../../../packages/http-methods.js";
+import { HttpMethod } from "@three-chess/common";
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");
 setupResponseChecker("check-get", "response", HttpMethod.GET);

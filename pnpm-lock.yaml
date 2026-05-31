@@ -230,6 +230,10 @@ importers:
         version: 6.0.3
 
   apps/frontend:
+    dependencies:
+      '@three-chess/common':
+        specifier: workspace:*
+        version: link:../../packages/common
     devDependencies:
       typescript:
         specifier: ~6.0.2
