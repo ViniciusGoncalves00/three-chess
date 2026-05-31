@@ -1,0 +1,8 @@
+{
+    "name": "@three-chess/common",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts"
+    }
+}

@@ -1,4 +1,4 @@
-import { HttpMethod } from "../common/http-methods.js";
+import { HttpMethod } from "../../../packages/http-methods.js";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

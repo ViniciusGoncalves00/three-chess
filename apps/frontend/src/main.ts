@@ -1,5 +1,5 @@
-import { setupResponseChecker } from "./check-response";
-import { HttpMethod } from "../common/http-methods.js";
+import { setupResponseChecker } from "./check-response.js";
+import { HttpMethod } from "../../../packages/http-methods.js";
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");
 setupResponseChecker("check-get", "response", HttpMethod.GET);

@@ -1,26 +1,14 @@
 {
-  "name": "three-chess",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "11.3.0",
-      "onFail": "download"
+    "name": "three-chess",
+    "version": "0.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+        "dev:frontend": "pnpm --filter frontend dev",
+        "dev:backend": "pnpm --filter backend dev",
+
+        "build": "pnpm -r build",
+
+        "test": "pnpm -r test"
     }
-  },
-  "type": "module",
-  "devDependencies": {
-    "@types/node": "25.9.1",
-    "ts-node": "10.9.2",
-    "tsx": "4.22.3",
-    "typescript": "6.0.3"
-  }
 }

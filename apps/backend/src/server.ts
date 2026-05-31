@@ -1,6 +1,6 @@
 import http from "node:http";
-import { HttpStatus } from "./http-status.js";
-import { HttpMethod } from "../common/http-methods.js";
+import { Router } from "./router.js";
+import { HttpMethod } from "@three-chess/common";
 
 const server = http.createServer((request, response) => {
     const allowedOrigins = [
@@ -27,30 +27,7 @@ const server = http.createServer((request, response) => {
         "Content-Type, Authorization"
     );
 
-    if (request.method === HttpMethod.OPTIONS) {
-        response.writeHead(HttpStatus.NoContent);
-        response.end();
-        return;
-    }
-
-    if (
-        request.method === HttpMethod.GET &&
-        request.url === "/health"
-    ) {
-        response.writeHead(HttpStatus.OK, { "Content-Type": "application/json" });
-
-        response.end(
-            JSON.stringify({
-                status: HttpStatus.OK,
-                message: "Service is running"
-            })
-        );
-
-        return;
-    }
-
-    response.writeHead(404);
-    response.end();
+    Router.handle(request, response);
 });
 
 server.listen(2001);

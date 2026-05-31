@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,8 +11,13 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "25.9.1",
     "tsx": "4.22.3",
     "typescript": "6.0.3"
+  },
+  "dependencies": {
+    "@three-chess/common": "workspace:*",
+    "better-sqlite3": "^12.10.0"
   }
 }
