@@ -70,3 +70,10 @@ I feel comfortable working with FE, so I will use technologies that I already kn
 - Docker
 - PWA
 
+# Running
+
+Frontend:
+cd src/frontend; pnpm dev
+
+Backend
+cd src/backend; pnpm dev
