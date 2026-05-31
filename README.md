@@ -73,7 +73,11 @@ I feel comfortable working with FE, so I will use technologies that I already kn
 # Running
 
 Frontend:
-cd src/frontend; pnpm dev
+```bash
+pnpm --dir src/frontend dev
+```
 
 Backend
-cd src/backend; pnpm dev
+```bash
+pnpm --dir src/backend dev
+```
