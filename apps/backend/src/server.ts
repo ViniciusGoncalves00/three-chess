@@ -1,9 +1,9 @@
 import http from "node:http";
 import { Router } from "./router.js";
 import { HttpMethod } from "@three-chess/common";
-import { getDatabase } from "./database/database.js";
+import { Database } from "./database/database.js";
 
-getDatabase();
+new Database();
 
 const server = http.createServer((request, response) => {
     const allowedOrigins = [

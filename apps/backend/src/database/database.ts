@@ -1,11 +1,14 @@
-import BetterSqlite3, { type Database } from "better-sqlite3";
+import BetterSqlite3 from "better-sqlite3";
 
-let database: Database | undefined = undefined;
+export class Database {
+    private readonly database: BetterSqlite3.Database;
 
-export function getDatabase(): Database {
-    if (!database) {
-        database = new BetterSqlite3("database.sqlite");
-        database.pragma("journal_mode = WAL");
+    public constructor() {
+        this.database = new BetterSqlite3("database.sqlite");
+        this.database.pragma("journal_mode = WAL");
     }
-    return database;
+
+    public getDatabase(): BetterSqlite3.Database {
+        return this.database;
+    }
 }
