@@ -6,6 +6,11 @@ dist
 dev-dist
 build
 
+# DB
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
 # Logs
 logs
 *.log

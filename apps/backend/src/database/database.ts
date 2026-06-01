@@ -1,8 +1,11 @@
-// import Database from 'better-sqlite3';
-// import BetterSqlite3 from 'better-sqlite3';
+import BetterSqlite3, { type Database } from "better-sqlite3";
 
-// const database = new Database('foobar.db');
-// database.pragma('journal_mode = WAL');
-// export function getDatabase(): BetterSqlite3.Database {
-//     return database;
-// }
+let database: Database | undefined = undefined;
+
+export function getDatabase(): Database {
+    if (!database) {
+        database = new BetterSqlite3("database.sqlite");
+        database.pragma("journal_mode = WAL");
+    }
+    return database;
+}
