@@ -5,7 +5,7 @@ export const LogType = {
 } as const;
 
 export type LogType = typeof LogType[keyof typeof LogType];
-export type LogListener = (entry: LogEntry) => void;
+export type LogListener = (entry: LogEntry, isAddition?: boolean) => void;
 
 export interface LogEntry {
     timestamp: Date;
@@ -37,12 +37,15 @@ export class Logger {
     }
 
     public static clearEntries(): void {
-        Logger.entries.length = 0;
+        const entries = Logger.entries.splice(0);
+        for (const entry of entries) {
+            this.notify(entry, false);
+        }
     }
 
-    private static notify(entry: LogEntry): void {
+    private static notify(entry: LogEntry, isAddition: boolean): void {
         for (const listener of Logger.listeners) {
-            listener(entry);
+            listener(entry, isAddition);
         }
     }
 
@@ -69,10 +72,9 @@ export class Logger {
         
         if (this.entries.length > this.MAX_ENTRIES) {
             const removed = this.entries.shift();
-            if (removed) this.notify(removed);
+            if (removed) this.notify(removed, false);
         }
 
-        console.log(type)
-        this.notify(entry);
+        this.notify(entry, true);
     }
 }
