@@ -2,8 +2,13 @@ import http from "node:http";
 import { Router } from "./router.js";
 import { HttpMethod } from "@three-chess/common";
 import { Database } from "./database/database.js";
+import { SQLiteUserRepository } from "./infrastructure/adapters/sqlite-user-repository.js";
+import { UserController } from "./presentation/user-controller.js";
 
-new Database();
+const database = new Database();
+
+const userRepository = new SQLiteUserRepository(database.getDatabase());
+UserController.init(userRepository);
 
 const server = http.createServer((request, response) => {
     const allowedOrigins = [

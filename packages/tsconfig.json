@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["common/*"]
     },
     // File Layout
     // "rootDir": "./src",

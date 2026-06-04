@@ -1,5 +1,5 @@
-import type { ValidationResult } from "../validation-result.js";
-import { Validator } from "../validator.js";
+import type { ValidationResult } from "../../validation-result.js";
+import { Validator } from "../../validator.js";
 import { UserRules } from "./user-rules.js";
 
 export class UserValidator extends Validator {
