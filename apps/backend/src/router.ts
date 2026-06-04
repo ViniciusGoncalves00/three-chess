@@ -1,5 +1,5 @@
-import { userRoutes } from "@three-chess/common";
 import http from "node:http";
+import { userRoutes } from "./presentation/user-routes.js";
 
 export const routes = [
     ...userRoutes,
@@ -21,35 +21,3 @@ export class Router {
         );
     }
 }
-
-// export class Router {
-//     public static handle(database: BetterSqlite3.Database, request: http.IncomingMessage, response: http.ServerResponse): void {
-//         if (request.method === HttpMethod.OPTIONS) {
-//             response.writeHead(HttpStatus.NoContent);
-//             response.end();
-//             return;
-//         }
-        
-//         if (request.method === HttpMethod.GET) {
-//             return this.get(database, request, response);
-//         }
-        
-//         response.writeHead(HttpStatus.NotFound);
-//         response.end();
-//     }
-
-//     private static get(database: BetterSqlite3.Database, request: http.IncomingMessage, response: http.ServerResponse): void {
-//         if (request.url === "/health") {
-//             response.writeHead(HttpStatus.OK, { "Content-Type": "application/json" });
-    
-//             response.end(
-//                 JSON.stringify({
-//                     status: HttpStatus.OK,
-//                     message: "Service is running"
-//                 })
-//             );
-    
-//             return;
-//         }
-//     }
-// }
