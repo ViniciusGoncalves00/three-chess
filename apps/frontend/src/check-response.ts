@@ -8,7 +8,7 @@ export async function setupResponseChecker(id: string, targetID: string, method:
     if (!element || !target) return;
 
     const checkResponse = async () => {
-        const input: RequestInfo = resource ? `${API_URL}/${resource}` : API_URL;
+        const input: RequestInfo = resource ? `${API_URL}${resource}` : API_URL;
         const init: RequestInit = {
             method: method
         }

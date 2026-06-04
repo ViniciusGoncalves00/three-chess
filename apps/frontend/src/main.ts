@@ -1,8 +1,10 @@
 import "./style.css";
 import { setupResponseChecker } from "./check-response.js";
-import { HttpMethod } from "@three-chess/common";
+import { HttpMethod, Routes } from "@three-chess/common";
 import { Logger } from "@three-chess/common";
 import { List } from "./list.js";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");
 setupResponseChecker("check-get", "response", HttpMethod.GET);
@@ -19,6 +21,42 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("fire-log-warn")!.addEventListener("click", () => Logger.warning("This is a warning log"));
     document.getElementById("fire-log-error")!.addEventListener("click", () => Logger.error("This is an error log"));
     document.getElementById("fire-log-clear")!.addEventListener("click", () => Logger.clearEntries());
+
+    document.getElementById("create-user")!.addEventListener("click", async () => {
+        const username = (document.getElementById("user-name") as HTMLInputElement).value;
+        const email = (document.getElementById("user-email") as HTMLInputElement).value;
+        const password = (document.getElementById("user-password") as HTMLInputElement).value;
+
+        Logger.info(`Creating user with username: ${username}, email: ${email}, password: ${password}`);
+
+        try {
+            const response = await fetch(
+                `${API_URL}${Routes.USERS}`,
+                {
+                    method: HttpMethod.POST,
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username,
+                        email,
+                        password
+                    })
+                }
+            );
+        
+            const data = await response.json();
+        
+            Logger.info(
+                `User created successfully: ${JSON.stringify(data)}`
+            );
+        
+        } catch (error) {
+            Logger.error(
+                `Error creating user: ${String(error)}`
+            );
+        }
+    });
 
     const logs = new List(document.getElementById("logs")!);
     Logger.subscribe((entry, isAddition) => {

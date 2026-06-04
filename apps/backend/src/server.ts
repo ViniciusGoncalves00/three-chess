@@ -13,7 +13,7 @@ UserController.init(userRepository);
 const server = http.createServer((request, response) => {
     const allowedOrigins = [
         "http://localhost:2000",
-        "http://192.168.0.107:2000"
+        "http://192.168.0.107:2000",
     ];
 
     const origin = request.headers.origin;
