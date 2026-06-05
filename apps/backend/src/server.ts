@@ -4,8 +4,10 @@ import { HttpMethod } from "@three-chess/common";
 import { Database } from "./database/database.js";
 import { SQLiteUserRepository } from "./infrastructure/adapters/sqlite-user-repository.js";
 import { UserController } from "./presentation/user-controller.js";
+import { Migrations } from "./database/migrations.js";
 
 const database = new Database();
+Migrations.run(database.getDatabase());
 
 const userRepository = new SQLiteUserRepository(database.getDatabase());
 UserController.init(userRepository);

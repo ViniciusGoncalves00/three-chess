@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { UserDTORequest, UserValidator } from "@three-chess/common";
+import { HttpStatus, UserDTORequest, UserValidator } from "@three-chess/common";
 import { RequestParser } from "@/request-parser.js";
 import type { UserRepository } from "@/domain/ports/user-repository.js";
 
@@ -28,13 +28,13 @@ export class UserController {
 
         this.repository?.create(user);
 
-        response.writeHead(201);
+        response.writeHead(HttpStatus.Created);
         response.end();
     }
 
     public static read(request: IncomingMessage, response: ServerResponse): void {
         const users = this.repository?.findAll();
-        response.writeHead(200, { "Content-Type": "application/json" });
+        response.writeHead(HttpStatus.OK, { "Content-Type": "application/json" });
         response.end(JSON.stringify(users));
     }
 

@@ -13,7 +13,7 @@ export const userRoutes = [
         handler: UserController.create
     },
     {
-        method: HttpMethod.PUT,
+        method: HttpMethod.PATCH,
         path: Routes.USERS,
         handler: UserController.update
     },

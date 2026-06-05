@@ -22,6 +22,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("fire-log-error")!.addEventListener("click", () => Logger.error("This is an error log"));
     document.getElementById("fire-log-clear")!.addEventListener("click", () => Logger.clearEntries());
 
+    document.getElementById("get-user")!.addEventListener("click", async () => {
+        try {
+            const response = await fetch(`${API_URL}${Routes.USERS}`, { method: HttpMethod.GET });
+            const data = await response.text();
+        
+            document.getElementById("users-list")!.innerText = data;
+        
+        } catch (error) {
+            Logger.error(
+                `Error creating user: ${String(error)}`
+            );
+        }
+    })
+
     document.getElementById("create-user")!.addEventListener("click", async () => {
         const username = (document.getElementById("user-name") as HTMLInputElement).value;
         const email = (document.getElementById("user-email") as HTMLInputElement).value;
@@ -45,10 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
         
-            const data = await response.json();
+            const data = await response.text();
         
             Logger.info(
-                `User created successfully: ${JSON.stringify(data)}`
+                `User created successfully: ${data}`
             );
         
         } catch (error) {

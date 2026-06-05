@@ -9,7 +9,7 @@ export class SQLiteUserRepository implements UserRepository {
         this.database = database;
     }
 
-    public create(user: UserDTORequest): void {
+    public create(user: UserDTORequest): UserDTOResponse {
         const statement =
             this.database.prepare(`
                 INSERT INTO users (
@@ -24,7 +24,13 @@ export class SQLiteUserRepository implements UserRepository {
                 )
             `);
 
-        const result = statement.run(user);
+            const result = statement.run(user);
+
+        return new UserDTOResponse(
+            String(result.lastInsertRowid),
+            user.username,
+            user.email
+        );
     }
 
     public findAll(): UserDTOResponse[] {
@@ -53,16 +59,13 @@ export class SQLiteUserRepository implements UserRepository {
             `);
 
         const row = statement.get(email);
+        if (!row) return;
 
-        if (!row) {
-            return undefined;
-        }
-
-        // return new UserResponse(
-        //     row.id,
-        //     row.username,
-        //     row.email,
-        // );
+        return new UserDTOResponse(
+            (row as any).id,
+            (row as any).username,
+            (row as any).email
+        );
     }
 
     public findByName(name: string): UserDTOResponse | undefined {

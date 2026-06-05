@@ -9,13 +9,13 @@ export const routes = [
 
 export class Router {
     public static async handle(request: http.IncomingMessage, response: http.ServerResponse): Promise<void> {
-        if (request.method === HttpMethod.OPTIONS) {
+        if (request.method == HttpMethod.OPTIONS) {
             response.writeHead(HttpStatus.NoContent);
             response.end();
             return;
         }
 
-        if (request.url === "/health") {
+        if (request.url == "/health") {
             response.writeHead(HttpStatus.OK, { "Content-Type": "application/json" });
     
             response.end(
@@ -28,7 +28,7 @@ export class Router {
             return;
         }
 
-        const route = routes.find((route) => route.path === request.url && route.method === request.method);
+        const route = routes.find((route) => route.path == request.url && route.method == request.method);
 
         if (!route) {
             response.writeHead(HttpStatus.NotFound);
