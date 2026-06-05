@@ -62,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.text();
         
             Logger.info(
+                `Status: ${response.status}`
+            );
+            Logger.info(
                 `User created successfully: ${data}`
             );
         

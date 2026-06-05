@@ -4,8 +4,8 @@
     "description": "",
     "private": true,
     "scripts": {
-        "dev:frontend": "pnpm --filter frontend dev",
-        "dev:backend": "pnpm --filter backend dev",
+        "dev:frontend": "pnpm --filter @three-chess/frontend dev",
+        "dev:backend": "pnpm --filter @three-chess/backend dev",
 
         "build": "pnpm -r build",
 

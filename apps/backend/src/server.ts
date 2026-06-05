@@ -1,6 +1,6 @@
 import http from "node:http";
 import { Router } from "./router.js";
-import { HttpMethod } from "@three-chess/common";
+import { HttpMethod, Logger } from "@three-chess/common";
 import { Database } from "./database/database.js";
 import { SQLiteUserRepository } from "./infrastructure/adapters/sqlite-user-repository.js";
 import { UserController } from "./presentation/user-controller.js";
@@ -12,7 +12,7 @@ Migrations.run(database.getDatabase());
 const userRepository = new SQLiteUserRepository(database.getDatabase());
 UserController.init(userRepository);
 
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
     const allowedOrigins = [
         "http://localhost:2000",
         "http://192.168.0.107:2000",
@@ -29,7 +29,7 @@ const server = http.createServer((request, response) => {
 
     response.setHeader(
         "Access-Control-Allow-Methods",
-        `${HttpMethod.GET}, ${HttpMethod.POST}, ${HttpMethod.PUT}, ${HttpMethod.DELETE}, ${HttpMethod.OPTIONS}`
+        `${HttpMethod.GET}, ${HttpMethod.POST}, ${HttpMethod.PATCH}, ${HttpMethod.DELETE}, ${HttpMethod.OPTIONS}`
     );
 
     response.setHeader(
@@ -37,7 +37,7 @@ const server = http.createServer((request, response) => {
         "Content-Type, Authorization"
     );
 
-    Router.handle(request, response);
+    await Router.handle(request, response);
 });
 
 server.listen(2001);

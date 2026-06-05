@@ -35,7 +35,7 @@ export class Router {
             response.end();
             return;
         }
-
+        
         route.handler(
             request,
             response

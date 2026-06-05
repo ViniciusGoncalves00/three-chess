@@ -7,10 +7,10 @@ export class UserController {
     private static repository: UserRepository | null = null;
 
     public static init(repository: UserRepository): void {
-        if (this.repository) {
+        if (UserController.repository) {
             throw new Error("UserController is already initialized.");
         }
-        this.repository = repository;
+        UserController.repository = repository;
     }
 
     public static async create(request: IncomingMessage, response: ServerResponse): Promise<void> {
@@ -18,24 +18,43 @@ export class UserController {
 
         const { username, email, password } = body;
         const validation = UserValidator.validate(username, email, password);
-        if (!validation.valid) return;
+        if (!validation.valid) {
+            response.writeHead(HttpStatus.BadRequest, {
+                "Content-Type": "application/json"
+            });
+        
+            response.end(
+                JSON.stringify(validation)
+            );
+        
+            return;
+        }
 
-        const user = new UserDTORequest(
+        const userDTORequest = new UserDTORequest(
             username,
             email,
             password
         );
 
-        this.repository?.create(user);
+        const userDTOResponse = UserController.repository?.create(userDTORequest);
 
-        response.writeHead(HttpStatus.Created);
-        response.end();
+        if (!userDTOResponse) {
+            response.writeHead(HttpStatus.BadRequest, {
+                "Content-Type": "application/json"
+            });
+        
+            return;
+        }
+
+        response.writeHead(HttpStatus.Created, { "Content-Type": "application/json" });
+        response.end(JSON.stringify(userDTOResponse));
     }
 
     public static read(request: IncomingMessage, response: ServerResponse): void {
-        const users = this.repository?.findAll();
+        const users = UserController.repository?.findAll();
         response.writeHead(HttpStatus.OK, { "Content-Type": "application/json" });
         response.end(JSON.stringify(users));
+        console.log("users", UserController.repository)
     }
 
     public static update(request: IncomingMessage, response: ServerResponse): void {
