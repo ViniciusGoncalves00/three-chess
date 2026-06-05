@@ -8,4 +8,12 @@ export class UserDTORequest {
         this.email = email;
         this.password = password;
     }
+
+    public toPlainObject() {
+        return {
+            username: this.username,
+            email: this.email,
+            password: this.password,
+        }
+    }
 }

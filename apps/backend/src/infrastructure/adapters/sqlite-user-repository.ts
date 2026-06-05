@@ -24,7 +24,7 @@ export class SQLiteUserRepository implements UserRepository {
                 )
             `);
 
-            const result = statement.run(user);
+            const result = statement.run(user.toPlainObject());
 
         return new UserDTOResponse(
             String(result.lastInsertRowid),
