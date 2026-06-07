@@ -1,10 +1,20 @@
 import "./style.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { setupResponseChecker } from "./check-response.js";
 import { HttpMethod, Routes } from "@three-chess/common";
 import { Logger } from "@three-chess/common";
 import { List } from "./list.js";
+import Alpine from 'alpinejs'
+import { Navigation } from "./navigation.js";
+import { Navigator } from "./store/navigator.js";
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+const navigation = new Navigation();
+const navigator = new Navigator(navigation);
+
+Alpine.store("navigator", navigator);
+Alpine.start();
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");
 setupResponseChecker("check-get", "response", HttpMethod.GET);

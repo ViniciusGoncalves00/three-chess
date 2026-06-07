@@ -1,1 +1,154 @@
 @import "tailwindcss";
+
+@utility ds-bg-primary {
+    background-color: var(--background-primary);
+}
+
+@utility ds-bg-secondary {
+    background-color: var(--background-secondary);
+}
+
+@utility ds-bg-tertiary {
+    background-color: var(--background-tertiary);
+}
+
+@utility ds-bg-elevated-primary {
+    background-color: var(--background-elevated);
+}
+
+@utility ds-bg-elevated-secondary {
+    background-color: var(--background-elevated);
+}
+
+@utility ds-text-primary {
+    color: var(--text-primary);
+}
+
+@utility ds-text-secondary {
+    color: var(--text-secondary);
+}
+
+@utility ds-text-tertiary {
+    color: var(--text-tertiary);
+}
+
+@utility ds-text-disabled {
+    color: var(--text-disabled);
+}
+
+@utility ds-border-subtle {
+    border-color: var(--border-subtle);
+}
+
+@utility ds-border-default {
+    border-color: var(--border-default);
+}
+
+@utility ds-border-strong {
+    border-color: var(--border-strong);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: var(--text-primary);
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.dark {
+    /* Backgrounds */
+    --background-primary: var(--gray-85);
+    --background-secondary: var(--gray-90);
+    --background-tertiary: var(--gray-95);
+    --background-elevated: var(--gray-100);
+
+    /* Borders */
+    --border-subtle: var(--gray-85);
+    --border-default: var(--gray-75);
+    --border-strong: var(--gray-60);
+
+    /* Text */
+    --text-primary: var(--gray-5);
+    --text-secondary: var(--gray-35);
+    --text-tertiary: var(--gray-50);
+    --text-disabled: var(--gray-65);
+
+    /* Interactive */
+    --interactive-default: var(--gray-20);
+    --interactive-hover: var(--gray-10);
+    --interactive-active: var(--gray-0);
+
+    /* States */
+    --hover-overlay: hsla(0, 0%, 0%, 0.04);
+    --active-overlay: hsla(0, 0%, 0%, 0.08);
+
+    /* Inputs */
+    --input-background: var(--gray-100);
+    --input-border: var(--gray-75);
+    --input-border-focus: var(--gray-45);
+
+    /* Shadows */
+    --shadow-color: hsla(0, 0%, 0%, 0.15);
+}
+
+:root {
+    /* Backgrounds */
+    --background-primary: var(--gray-10);
+    --background-secondary: var(--gray-15);
+    --background-tertiary: var(--gray-20);
+    --background-elevated: var(--gray-25);
+
+    /* Borders */
+    --border-subtle: var(--gray-20);
+    --border-default: var(--gray-30);
+    --border-strong: var(--gray-45);
+
+    /* Text */
+    --text-primary: var(--gray-95);
+    --text-secondary: var(--gray-75);
+    --text-tertiary: var(--gray-60);
+    --text-disabled: var(--gray-45);
+
+    /* Interactive */
+    --interactive-default: var(--gray-80);
+    --interactive-hover: var(--gray-90);
+    --interactive-active: var(--gray-100);
+
+    /* States */
+    --hover-overlay: hsla(0, 0%, 100%, 0.05);
+    --active-overlay: hsla(0, 0%, 100%, 0.10);
+
+    /* Inputs */
+    --input-background: var(--gray-10);
+    --input-border: var(--gray-30);
+    --input-border-focus: var(--gray-55);
+
+    /* Shadows */
+    --shadow-color: hsla(0, 0%, 0%, 0.50);
+}
+
+:root {
+    --gray-0:  hsl(0, 0%, 0%);
+    --gray-5:  hsl(0, 0%, 5%);
+    --gray-10: hsl(0, 0%, 10%);
+    --gray-15: hsl(0, 0%, 15%);
+    --gray-20: hsl(0, 0%, 20%);
+    --gray-25: hsl(0, 0%, 25%);
+    --gray-30: hsl(0, 0%, 30%);
+    --gray-35: hsl(0, 0%, 35%);
+    --gray-40: hsl(0, 0%, 40%);
+    --gray-45: hsl(0, 0%, 45%);
+    --gray-50: hsl(0, 0%, 50%);
+    --gray-55:  hsl(0, 0%, 55%);
+    --gray-60: hsl(0, 0%, 60%);
+    --gray-65: hsl(0, 0%, 65%);
+    --gray-70: hsl(0, 0%, 70%);
+    --gray-75: hsl(0, 0%, 75%);
+    --gray-80: hsl(0, 0%, 80%);
+    --gray-85: hsl(0, 0%, 85%);
+    --gray-90: hsl(0, 0%, 90%);
+    --gray-95: hsl(0, 0%, 95%);
+    --gray-100: hsl(0, 0%, 100%);
+}
