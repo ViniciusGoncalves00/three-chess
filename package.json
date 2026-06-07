@@ -9,6 +9,12 @@
 
         "build": "pnpm -r build",
 
-        "test": "pnpm -r test"
+        "test": "pnpm -r test",
+
+        "add:frontend": "pnpm --filter @three-chess/frontend add",
+        "add:backend": "pnpm --filter @three-chess/backend add",
+
+        "add-dev:frontend": "pnpm --filter @three-chess/frontend add -D",
+        "add-dev:backend": "pnpm --filter @three-chess/backend add -D"
     }
 }
