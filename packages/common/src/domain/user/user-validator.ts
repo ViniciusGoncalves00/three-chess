@@ -14,30 +14,22 @@ export class UserValidator extends Validator {
     public static validateUsername(username: string): ValidationResult {
         const errors: string[] = [];
 
-        if (username.trim().length < UserRules.MIN_USERNAME_LENGTH) {
+        if (username.trim().length < UserRules.USERNAME_MIN_LENGTH) {
             errors.push(
-                `Username must contain at least ${UserRules.MIN_USERNAME_LENGTH} characters`
+                `Username must contain at least ${UserRules.USERNAME_MIN_LENGTH} characters.`
             );
         }
 
-        if (username.length > UserRules.MAX_USERNAME_LENGTH) {
+        if (username.length > UserRules.USERNAME_MAX_LENGTH) {
             errors.push(
-                `Username must not exceed ${UserRules.MAX_USERNAME_LENGTH} characters`
+                `Username must not exceed ${UserRules.USERNAME_MAX_LENGTH} characters.`
             );
         }
 
-        return this.result(errors);
-    }
-
-    public static validatePassword(password: string): ValidationResult {
-        const errors: string[] = [];
-
-        if (password.length < UserRules.MIN_PASSWORD_LENGTH) {
-            errors.push(`Password must contain at least ${UserRules.MIN_PASSWORD_LENGTH} characters`);
-        }
-
-        if (password.length > UserRules.MAX_PASSWORD_LENGTH) {
-            errors.push(`Password must not exceed ${UserRules.MAX_PASSWORD_LENGTH} characters`);
+        if (!UserRules.USERNAME_REGEX.test(username)) {
+            errors.push(
+                "Username may contain only letters, numbers and underscores."
+            );
         }
 
         return this.result(errors);
@@ -46,8 +38,22 @@ export class UserValidator extends Validator {
     public static validateEmail(email: string): ValidationResult {
         const errors: string[] = [];
 
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            errors.push(`Invalid email format`);
+        if (!UserRules.EMAIL_REGEX.test(email)) {
+            errors.push(`This is not a valid email format.`);
+        }
+
+        return this.result(errors);
+    }
+
+    public static validatePassword(password: string): ValidationResult {
+        const errors: string[] = [];
+
+        if (password.length < UserRules.PASSWORD_MIN_LENGTH) {
+            errors.push(`Password must contain at least ${UserRules.PASSWORD_MIN_LENGTH} characters.`);
+        }
+
+        if (password.length > UserRules.PASSWORD_MAX_LENGTH) {
+            errors.push(`Password must not exceed ${UserRules.PASSWORD_MAX_LENGTH} characters.`);
         }
 
         return this.result(errors);
