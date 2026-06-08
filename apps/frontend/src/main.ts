@@ -1,4 +1,5 @@
 import "./style.css";
+import "./components/index.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { setupResponseChecker } from "./check-response.js";
 import { HttpMethod, Routes, UserValidator } from "@three-chess/common";
@@ -7,6 +8,8 @@ import { List } from "./list.js";
 import Alpine from 'alpinejs'
 import { Navigation } from "./navigation.js";
 import { Navigator } from "./store/navigator.js";
+import { Register } from "./store/register.js";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -15,6 +18,7 @@ const navigator = new Navigator(navigation);
 
 Alpine.store("navigator", navigator);
 Alpine.store("userValidator", UserValidator);
+Alpine.store("register", new Register());
 Alpine.start();
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");
