@@ -12,6 +12,10 @@ export class Navigator {
         this.navigation.navigate(Routes.HOME);
     }
 
+    public goMatch(): void {
+        this.navigation.navigate(Routes.MATCH);
+    }
+
     public goLogin(): void {
         this.navigation.navigate(Routes.LOGIN);
     }
@@ -22,6 +26,10 @@ export class Navigator {
 
     public isHome(): boolean {
         return this.navigation.current() == Routes.HOME;
+    }
+
+    public isMatch(): boolean {
+        return this.navigation.current() == Routes.MATCH;
     }
 
     public isLogin(): boolean {

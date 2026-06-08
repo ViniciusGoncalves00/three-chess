@@ -1,7 +1,7 @@
 import "./style.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { setupResponseChecker } from "./check-response.js";
-import { HttpMethod, Routes } from "@three-chess/common";
+import { HttpMethod, Routes, UserValidator } from "@three-chess/common";
 import { Logger } from "@three-chess/common";
 import { List } from "./list.js";
 import Alpine from 'alpinejs'
@@ -14,6 +14,7 @@ const navigation = new Navigation();
 const navigator = new Navigator(navigation);
 
 Alpine.store("navigator", navigator);
+Alpine.store("userValidator", UserValidator);
 Alpine.start();
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");

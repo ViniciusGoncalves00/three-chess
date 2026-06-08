@@ -6,10 +6,13 @@
     <script type="module" src="/src/main.ts"></script>
 </head>
 <body x-data class="ds-bg-primary ds-text-primary h-screen w-full flex flex-col">
-    <header class="w-full p-4 flex items-center justify-between space-x-4">
+    <header class="fixed w-full p-4 flex items-center justify-between space-x-4 z-10">
         <div class="h-full flex items-center">
             <button type="button" class="px-2 py-2 space-x-1 flex-none flex items-center justify-center cursor-pointer transition-colors duration-500 border-b-2 border-amber-500/0 hover:border-amber-500">
                 <span @click="$store.navigator.goHome()" class="flex items-center justify-center text-md font-bold uppercase">chess</span>
+            </button>
+            <button type="button" class="px-2 py-2 space-x-1 flex-none flex items-center justify-center cursor-pointer transition-colors duration-500 border-b-2 border-amber-500/0 hover:border-amber-500">
+                <span @click="$store.navigator.goMatch()" class="flex items-center justify-center text-md font-bold uppercase">play</span>
             </button>
         </div>
         <div class="h-full flex items-center"></div>
@@ -23,28 +26,75 @@
         </div>
     </header>
     <main class="h-full w-full">
-        <div x-show="$store.navigator.isHome()"></div>
-        <div x-show="$store.navigator.isLogin()" class="h-full w-full flex items-center justify-center">
-            <form class="space-y-2 flex flex-col">
-                <span class="ds-bg-secondary px-4 py-2 space-x-2 flex items-center rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline">
-                    <i class="bi bi-person"></i>
-                    <label for="username"></label>
-                    <input id="username" placeholder="username" type="text" class="appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
-                </span>
-                <span class="ds-bg-secondary px-4 py-2 space-x-2 flex items-center rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline">
-                    <i class="bi bi-envelope"></i>
-                    <label for="email"></label>
-                    <input id="email" placeholder="example@mail.com" type="email" class="appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
-                </span>
-                <span class="ds-bg-secondary px-4 py-2 space-x-2 flex items-center rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" x-data="{ visible: false }">
-                    <i class="bi bi-lock"></i>
-                    <label for="password"></label>
-                    <input id="password" placeholder="password" :type="visible ? 'text' : 'password'" class="appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
-                    <i @click="visible = !visible" class="bi cursor-pointer" :class="visible ? 'bi-eye-slash' : 'bi-eye'"></i>
-                </span>
+        <img class="w-full h-full fixed blur-xs" src="/horse.png" >
+        <div x-show="$store.navigator.isHome()" class="w-full h-full flex items-center justify-center z-10"></div>
+        <div x-show="$store.navigator.isLogin()" class="backdrop-blur-sm w-full h-full flex items-center justify-center z-10">
+            <form class="ds-bg-primary p-4 space-y-2 flex flex-col rounded-lg"
+                x-data="{
+                    username: '',
+                    email: '',
+                    password: '',
+
+                    get valid() {
+                        return (
+                            $store.userValidator.validateUsername(this.username).valid &&
+                            $store.userValidator.validateEmail(this.email).valid &&
+                            $store.userValidator.validatePassword(this.password).valid
+                        );
+                    }
+                }">
+                <div class="w-96 flex flex-col" x-data="{ errors: [] }">
+                    <span class="ds-bg-secondary px-3 py-2 space-x-2 flex items-center border rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" :class="errors.length == 0 ? 'ds-border-default' : 'border-rose-700'">
+                        <i class="bi bi-person h-full aspect-square flex-none flex items-center"></i>
+                        <input
+                            x-model="username"
+                            placeholder="username"
+                            type="text"
+                            @input.debounce.500ms="errors = $store.userValidator.validateUsername($event.target.value).errors"
+                            class="w-full appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
+                    </span>
+                    <template x-for="error in errors" :key="error">
+                        <p class="px-3 text-xs text-rose-700" x-text="`- ${error}`"></p>
+                    </template>
+                </div>
+                <div class="w-96 flex flex-col" x-data="{ errors: [] }">
+                    <span class="ds-bg-secondary px-3 py-2 space-x-2 flex items-center border rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" :class="errors.length == 0 ? 'ds-border-default' : 'border-rose-700'">
+                        <i class="bi bi-envelope h-full aspect-square flex-none flex items-center"></i>
+                        <label for="email"></label>
+                        <input
+                            x-model="email"
+                            placeholder="example@email.com"
+                            type="email"
+                            @input.debounce.500ms="errors = $store.userValidator.validateEmail($event.target.value).errors"
+                            class="w-full appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
+                    </span>
+                    <template x-for="error in errors" :key="error">
+                        <p class="px-3 text-xs text-rose-700" x-text="`- ${error}`"></p>
+                    </template>
+                </div>
+                <div class="w-96 flex flex-col" x-data="{ errors: [] }">
+                    <span class="ds-bg-secondary px-3 py-2 space-x-2 flex items-center border rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" :class="errors.length == 0 ? 'ds-border-default' : 'border-rose-700'" x-data="{ visible: false }">
+                        <i class="bi bi-lock h-full aspect-square flex-none flex items-center"></i>
+                        <label for="password"></label>
+                        <input
+                            x-model="password"
+                            placeholder="password"
+                            :type="visible ? 'text' : 'password'"
+                            @input.debounce.500ms="errors = $store.userValidator.validatePassword($event.target.value).errors"
+                            class="w-full appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
+                        <i @click="visible = !visible" class="bi flex-none cursor-pointer" :class="visible ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </span>
+                    <template x-for="error in errors" :key="error">
+                        <p class="px-3 text-xs text-rose-700" x-text="`- ${error}`"></p>
+                    </template>
+                </div>
                 <button
-                    class="ds-bg-secondary ds-border-default hover:ds-bg-elevated-primary px-4 py-1 space-x-2 flex items-center justify-center border rounded cursor-pointer transition-colors duration-300">
+                    type="button"
+                    :disabled="!valid"
+                    :class="valid ? 'hover:ds-bg-elevated-primary cursor-pointer' : 'opacity-50'"
+                    class="ds-bg-secondary ds-border-default px-4 py-2 space-x-2 flex items-center justify-center border rounded transition-colors duration-300">
                     <span>Continue</span>
+                    <i class="bi bi-arrow-right h-full aspect-square flex-none flex items-center"></i>
                 </button>
                 <div class="py-2 flex items-center space-x-2 w-full">
                     <div class="flex-1 h-px ds-bg-secondary"></div>
@@ -52,18 +102,24 @@
                     <div class="flex-1 h-px ds-bg-secondary"></div>
                 </div>
                 <button
-                    class="ds-bg-secondary ds-border-default hover:ds-bg-elevated-primary px-4 py-1 space-x-2 flex items-center justify-center border rounded cursor-pointer transition-colors duration-300"
+                    class="ds-bg-secondary ds-border-default hover:ds-bg-elevated-primary px-4 py-2 space-x-2 flex items-center justify-center border rounded cursor-pointer transition-colors duration-300"
                     @click="window.location.href='/api/auth/google'">
                     <i class="bi bi-phone text-xs"></i>
                     <span>Continue with Phone</span>
                 </button>
                 <button
-                    class="ds-bg-secondary ds-border-default hover:ds-bg-elevated-primary px-4 py-1 space-x-2 flex items-center justify-center border rounded cursor-pointer transition-colors duration-300"
+                    class="ds-bg-secondary ds-border-default hover:ds-bg-elevated-primary px-4 py-2 space-x-2 flex items-center justify-center border rounded cursor-pointer transition-colors duration-300"
                     @click="window.location.href='/api/auth/google'">
                     <i class="bi bi-google text-xs"></i>
                     <span>Continue with Google</span>
                 </button>
             </form>
+        </div>
+        <div x-show="$store.navigator.isMatch()" class="backdrop-blur-sm w-full h-full flex items-start justify-center z-10">
+            <div class="flex">
+                <div class="h-12 aspect-square border border-amber-500"></div>
+                <div class="h-12 aspect-square border border-amber-500"></div>
+            </div>
         </div>
     </main>
     <footer class="w-full flex items-center justify-center space-x-2">
