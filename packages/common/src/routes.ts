@@ -3,6 +3,7 @@ export const Routes = {
     MATCH: "/match",
     USERS: "/users",
     LOGIN: "/auth/login",
+    SIGNUP: "/auth/signup",
     REGISTER: "/auth/register"
 } as const;
 

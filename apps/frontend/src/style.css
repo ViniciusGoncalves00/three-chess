@@ -20,6 +20,14 @@
     background-color: var(--background-elevated);
 }
 
+@utility ds-bg-accent {
+    background-color: var(--accent);
+}
+
+@utility ds-bg-accent-elevated {
+    background-color: var(--accent-elevated);
+}
+
 @utility ds-text-primary {
     color: var(--text-primary);
 }
@@ -37,14 +45,17 @@
 }
 
 @utility ds-border-subtle {
+    border-width: 1px;
     border-color: var(--border-subtle);
 }
 
 @utility ds-border-default {
+    border-width: 1px;
     border-color: var(--border-default);
 }
 
 @utility ds-border-strong {
+    border-width: 1px;
     border-color: var(--border-strong);
 }
 
@@ -58,6 +69,9 @@ input:-webkit-autofill:active {
 }
 
 .dark {
+    --accent: rgb(187, 77, 0);
+    --accent-elevated: rgb(225, 113, 0);
+
     /* Backgrounds */
     --background-primary: var(--gray-85);
     --background-secondary: var(--gray-90);
@@ -94,6 +108,9 @@ input:-webkit-autofill:active {
 }
 
 :root {
+    --accent: rgb(187, 77, 0);
+    --accent-elevated: rgb(225, 113, 0);
+
     /* Backgrounds */
     --background-primary: var(--gray-10);
     --background-secondary: var(--gray-15);
