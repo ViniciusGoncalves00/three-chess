@@ -65,6 +65,76 @@
                         <p class="px-3 text-xs text-rose-700" x-text="`- ${error}`"></p>
                     </template>
                 </div>
+                <div
+                    x-data="{
+                        open: false,
+                        errors: [],
+                    }"
+                    class="w-96 flex flex-col relative transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline"
+                    :class="{
+                        'outline outline-amber-500': open,
+                        'outline-transparent': !open
+                    }"
+                >
+                    <span
+                        class="ds-bg-secondary ds-border-default px-3 py-2 flex items-center gap-2 border rounded cursor-pointer"
+                        @click="open = !open"
+                    >
+                        <i class="bi bi-globe-americas"></i>  
+                        <span
+                            class="flex-1"
+                            x-text="`${$store.countries.getByCode($store.register.country)?.name} (${$store.register.country})`">
+                        </span>
+                        <i
+                            class="bi"
+                            :class="open ? 'bi-chevron-up' : 'bi-chevron-down'">
+                        </i>
+                    </span>
+                
+                    <div
+                        x-show="open"
+                        @click.outside="open = false"
+                        x-transition
+                        class="absolute top-full left-0 right-0 mt-2 ds-bg-primary ds-border-default border rounded shadow-lg max-h-64 overflow-y-auto z-50"
+                    >
+                        <template
+                            x-for="country in $store.register.countries"
+                            :key="country.code"
+                        >
+                            <button
+                                type="button"
+                                class="w-full px-3 py-2 text-left hover:ds-bg-secondary transition-colors cursor-pointer"
+                                @click="
+                                    $store.register.country = country.code;
+                                    errors = $store.userValidator.validateCountry(country.code).errors;
+                                    open = false;
+                                "
+                            >
+                                <span x-text="`${country.name} (${country.code})`"></span>
+                            </button>
+                        </template>
+                    </div>
+                
+                    <template x-for="error in errors" :key="error">
+                        <p
+                            class="px-3 text-xs text-rose-700"
+                            x-text="`- ${error}`">
+                        </p>
+                    </template>
+                </div>
+                <div class="w-96 flex flex-col" x-data="{ errors: [] }">
+                    <span class="ds-bg-secondary px-3 py-2 space-x-2 flex items-center border rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" :class="errors.length == 0 ? 'ds-border-default' : 'border-rose-700'">
+                        <i class="bi bi-calendar h-full aspect-square flex-none flex items-center"></i>
+                        <input
+                            x-model="$store.register.date"
+                            type="date"
+                            @input.debounce.500ms="errors = $store.userValidator.validateDateOfBirth($event.target.value).errors"
+                            class="w-full appearance-none bg-transparent border-none outline-none shadow-none p-0 m-0">
+                    </span>
+                    <template x-for="error in errors" :key="error">
+                        <p class="px-3 text-xs text-rose-700" x-text="`- ${error}`"></p>
+                    </template>
+                </div>
                 <div class="w-96 flex flex-col" x-data="{ errors: [] }">
                     <span class="ds-bg-secondary px-3 py-2 space-x-2 flex items-center border rounded transition-colors duration-300 outline-transparent hover:outline-amber-500 hover:outline active:outline" :class="errors.length == 0 ? 'ds-border-default' : 'border-rose-700'" x-data="{ visible: false }">
                         <i class="bi bi-lock h-full aspect-square flex-none flex items-center"></i>

@@ -2,7 +2,7 @@ import "./style.css";
 import "./components/index.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { setupResponseChecker } from "./check-response.js";
-import { HttpMethod, Routes, UserValidator } from "@three-chess/common";
+import { Countries, HttpMethod, Routes, UserValidator } from "@three-chess/common";
 import { Logger } from "@three-chess/common";
 import { List } from "./list.js";
 import Alpine from 'alpinejs'
@@ -19,6 +19,7 @@ const navigator = new Navigator(navigation);
 Alpine.store("navigator", navigator);
 Alpine.store("userValidator", UserValidator);
 Alpine.store("register", new Register());
+Alpine.store("countries", Countries);
 Alpine.start();
 
 setupResponseChecker("check-health", "response", HttpMethod.GET, "health");

@@ -1,14 +1,17 @@
+import { Countries, Country } from "@three-chess/common";
 import type { ValidationResult } from "../../validation-result.js";
 import { Validator } from "../../validator.js";
 import { UserRules } from "./user-rules.js";
 
 export class UserValidator extends Validator {
-    public static validate(username: string, email: string, password: string): ValidationResult {
+    public static validate(username: string, email: string, password: string, dateOfBirth: string, countryCode: string): ValidationResult {
         const usernameValidation = UserValidator.validateUsername(username)
         const emailValidation = UserValidator.validateEmail(email);
         const passwordValidation = UserValidator.validatePassword(password);
+        const dateOfBirthValidation = UserValidator.validateDateOfBirth(dateOfBirth);
+        const countryValidation = UserValidator.validateCountry(countryCode);
 
-        return this.combine([usernameValidation, emailValidation, passwordValidation]);
+        return this.combine([usernameValidation, emailValidation, passwordValidation, dateOfBirthValidation, countryValidation]);
     }
 
     public static validateUsername(username: string): ValidationResult {
@@ -40,6 +43,61 @@ export class UserValidator extends Validator {
 
         if (!UserRules.EMAIL_REGEX.test(email)) {
             errors.push(`This is not a valid email format.`);
+        }
+
+        return this.result(errors);
+    }
+
+    public static validateDateOfBirth(value: string): ValidationResult {
+        const errors: string[] = [];
+
+        const date = new Date(value);
+        
+        if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
+            errors.push("Date of birth is invalid.");
+            return this.result(errors);
+        }
+
+        const today = new Date();
+
+        if (date > today) {
+            errors.push("Date of birth cannot be in the future.");
+            return this.result(errors);
+        }
+
+        let age = today.getFullYear() - date.getFullYear();
+
+        const birthdayPassed =
+            today.getMonth() > date.getMonth() ||
+            (
+                today.getMonth() === date.getMonth() &&
+                today.getDate() >= date.getDate()
+            );
+
+        if (!birthdayPassed) {
+            age--;
+        }
+
+        if (age < UserRules.MINIMUM_AGE) {
+            errors.push(
+                `You must be at least ${UserRules.MINIMUM_AGE} years old.`
+            );
+        }
+
+        if (age > UserRules.MAXIMUM_AGE) {
+            errors.push("Date of birth is invalid.");
+        }
+
+        return this.result(errors);
+    }
+
+    public static validateCountry(code: string): ValidationResult {
+        const errors: string[] = [];
+
+        if (!Countries.hasCode(code)) {
+            errors.push(
+                "Country must be a valid ISO 3166-1 alpha-2 code."
+            );
         }
 
         return this.result(errors);
