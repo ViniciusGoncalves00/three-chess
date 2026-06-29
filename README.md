@@ -12,6 +12,7 @@ _Three Chess_ is a web-based implementation of the classic game _Chess_.
    2. [First Step](#first-step)
    3. [Why a chess game?](#why-a-chess-game)
    4. [How support both desktop and mobile?](#how-support-both-desktop-and-mobile)
+   5. [How to keep it simple as possible?](#how-to-keep-it-simple-as-possible)
 3. [Technologies](#technologies)
    1. [Front End](#front-end)
    2. [Back End](#back-end)
@@ -50,6 +51,16 @@ It is possible to imagine this project finished.
 ## How support both desktop and mobile?
 
 Progressive web applications (PWAs) seem like a good option, and I have never used it. So, this is an opportunity to see how it works.
+
+## How to keep it simple as possible?
+
+One question that kept coming to mind was: how can the codebase remain as small and maintainable as possible?
+
+Building both the frontend and the backend inevitably leads to duplication. Models, validation rules, route definitions, and other pieces of logic often exist in multiple places, requiring changes to be made more than once and increasing the chances of inconsistencies.
+
+This project explores whether a monorepo, combined with TypeScript across the entire stack, can help address that problem. Rather than treating the frontend and backend as completely separate applications, the idea is to centralize everything that naturally belongs to both whenever it makes sense.
+
+Whether this approach proves worthwhile remains to be seen. However, the experiment itself is valuable: can a shared codebase reduce maintenance costs while keeping each part of the application independent enough to evolve on its own?
 
 # Technologies
 
