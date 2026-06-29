@@ -9,9 +9,15 @@ _Three Chess_ is a web-based implementation of the classic game _Chess_.
 1. [Motivation](#motivation)
 2. [Methodology](#methodology)
    1. [Goals](#goals)
-   2. [First Step](#why-a-chess-game)
+   2. [First Step](#first-step)
    3. [Why a chess game?](#why-a-chess-game)
-
+   4. [How support both desktop and mobile?](#how-support-both-desktop-and-mobile)
+3. [Technologies](#technologies)
+   1. [Front End](#front-end)
+   2. [Back End](#back-end)
+   3. [Infrastructure](#infrastructure)
+   4. [Database](#database)
+   5. [Tooling](#tooling)
 ---
 
 # Motivation
@@ -45,28 +51,28 @@ It is possible to imagine this project finished.
 
 Progressive web applications (PWAs) seem like a good option, and I have never used it. So, this is an opportunity to see how it works.
 
-## Technologies
+# Technologies
 
-### Front-End (FE)
+The following technologies have been used throughout the project's development. Some remain part of the current stack, while others were replaced as the architecture evolved. Each entry briefly explains the reasoning behind its adoption and, when applicable, why it was eventually replaced.
 
-I feel comfortable working with FE, so I will use technologies that I already know and like. There is nothing in particular that I want to learn at moment in FE, and I also do not want to increase the complexity.
-- Typescript
-- ThreeJS
-- AlpineJS
-- TailwindCSS
-- HTML
-- CSS
+## Front End
 
-### Back-End (BE)
+- Typescript: I like typed languages :)
+- Chess.js: at this point, I see no reason to implement the chess logic myself. There are many edge cases and rules that would require significant effort to handle correctly, and solving those problems would only distract from the actual goals of this project.
+- Three.js: the abstraction offered by Three.js is excellent. I feel more confident using it, and I don't see a compelling reason to adopt another engine such as Babylon.js for this project.
+- Alpine.js: I wanted a lightweight solution that keeps the application close to standard HTML instead of introducing a large framework. Alpine.js provides enough reactivity for the UI while keeping the code simple and allowing me to build my own architecture around Web Components and TypeScript.
+- Tailwind CSS: I prefer a utility-first approach over maintaining large CSS files. Tailwind makes it easy to prototype interfaces quickly while remaining consistent. Combined with a small design system based on CSS variables, it provides a flexible foundation for supporting themes and reusable components.
+
+## Back End
 -
 
-### Infrastructure
+## Infrastructure
 -
 
-### Database
+## Database
 -
 
-### Tooling
+## Tooling
 - Docker
 - PWA
 
