@@ -4,17 +4,19 @@
     "description": "",
     "private": true,
     "scripts": {
-        "dev:frontend": "pnpm --filter @three-chess/frontend dev",
         "dev:backend": "pnpm --filter @three-chess/backend dev",
+        "dev:frontend": "pnpm --filter @three-chess/frontend dev",
 
         "build": "pnpm -r build",
 
         "test": "pnpm -r test",
 
-        "add:frontend": "pnpm --filter @three-chess/frontend add",
         "add:backend": "pnpm --filter @three-chess/backend add",
-
-        "add-dev:frontend": "pnpm --filter @three-chess/frontend add -D",
-        "add-dev:backend": "pnpm --filter @three-chess/backend add -D"
+        "add:common": "pnpm --filter @three-chess/common add",
+        "add:frontend": "pnpm --filter @three-chess/frontend add",
+        
+        "add-dev:backend": "pnpm --filter @three-chess/backend add -D",
+        "add-dev:common": "pnpm --filter @three-chess/common add -D",
+        "add-dev:frontend": "pnpm --filter @three-chess/frontend add -D"
     }
 }
