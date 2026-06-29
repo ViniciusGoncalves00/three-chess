@@ -78,12 +78,36 @@ The following technologies have been used throughout the project's development. 
 
 # Running
 
-Frontend:
+From the project root:
+
+## Start the frontend
+
 ```bash
 pnpm --dir src/frontend dev
 ```
 
-Backend
+## Start the backend
+
 ```bash
 pnpm --dir src/backend dev
+```
+
+## Installing dependencies
+
+Syntax for dependency:
+
+```bash
+pnpm run add:<app> <package>
+```
+
+Syntax for development dependency:
+
+```bash
+pnpm run add-dev:<app> <package>
+```
+
+Example:
+
+```bash
+pnpm run add:frontend chess.js
 ```
